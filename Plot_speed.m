@@ -5,24 +5,24 @@ clear;
 wavespeedall = [];
 wavespeedvarall = [];
 
-num = 200;
-wavespeed = [];
-for ens = 1:1
-
-    foldername = ['Viscous_'  num2str(num)];
-
-    %% ----------- Uncomment when you run multiple ensumble and named in this way ---------------
-    % entire = load([foldername '/entire_' num2str(5) 'ens_' num2str(ens) '.mat'], "entire").entire;
+for num = 100:50:300
+    wavespeed = [];
+    for ens = 10:10
     
-    entire = load([foldername '/entire_' num2str(num/20) '.mat' ], "entire").entire;
-    if max(entire.S, [], "all") > 1e-5
-        wavespeed(end+1) = 60*2*pi/mean(entire.corrperiod_diffr((entire.reff>0.6) & (entire.reff<0.8)) );
-    end   
+        foldername = ['Viscous_'  num2str(num)];
+    
+        %% ----------- Uncomment when you run multiple ensumble and named in this way ---------------
+        % entire = load([foldername '/entire_' num2str(5) 'ens_' num2str(ens) '.mat'], "entire").entire;
+        
+        entire = load([foldername '/entire_' num2str(num/20) '.mat' ], "entire").entire;
+        if max(entire.S, [], "all") > 1e-5
+            wavespeed(end+1) = 60*2*pi/mean(entire.corrperiod_diffr((entire.reff>0.6) & (entire.reff<0.8)) );
+        end   
+    end
+    
+    wavespeedall(end+1) = mean(wavespeed);
+    wavespeedvarall(end+1) = std(wavespeed);
 end
-
-wavespeedall(end+1) = mean(wavespeed);
-wavespeedvarall(end+1) = std(wavespeed);
-
 
 
 
