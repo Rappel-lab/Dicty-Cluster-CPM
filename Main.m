@@ -150,7 +150,7 @@ for M = st:Nrun
     %% -------------------- Main simulation loop --------------------
     FIG = figure('Position',[10 10 subplotN*512 512]);
     visible = true;
-    hil = load('./hilresult_v2.mat').hil;
+    hil = load('./hilresult.mat').hil;
     [cmphase, cmr] = cart2pol(cmx-mean(cmx,'all'), cmy-mean(cmy,'all'));
     intpg = interp1(hil.phase,hil.g,cmphase);
     intpr = interp1(hil.phase,hil.r,cmphase);
